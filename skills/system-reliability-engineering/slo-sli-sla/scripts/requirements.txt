@@ -1,0 +1,16 @@
+# SLO/SLI/SLA Scripts Dependencies
+
+# Error Budget Calculator
+# No external dependencies (uses only stdlib)
+
+# SLO API Service
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+requests>=2.31.0
+
+# Optional: For development
+# pytest>=7.4.0
+# pytest-asyncio>=0.21.0
+# httpx>=0.25.0  # For testing FastAPI
+

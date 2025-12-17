@@ -1,0 +1,62 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code related
+.vscode/
+
+# IDE-specific MCP configs (symlinks to root mcp.json)
+# Mantener solo mcp.json en la raíz
+.cline/
+.windsurf/
+.gemini/
+.idx/
+.claude/
+
+# Environment variables (nunca commitear tokens)
+.env
+.env.local
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Examples (si decides agregar ejemplos completos)
+examples/**/build/
+examples/**/.dart_tool/
+examples/**/.packages
+.cursor/rules/byterover-rules.mdc
+.kilocode/rules/byterover-rules.md
+.cursor/mcp.json

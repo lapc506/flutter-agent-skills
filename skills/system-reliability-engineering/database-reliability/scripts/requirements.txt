@@ -1,0 +1,11 @@
+# Database Reliability Scripts Dependencies
+
+# PostgreSQL Backup Script
+# No external dependencies (uses only stdlib: subprocess, pathlib, datetime)
+
+# Note: Requires PostgreSQL client tools:
+# - pg_basebackup (for backups)
+# - pg_verifybackup (for verification, optional)
+# - tar (for extraction)
+# - systemctl (for service management, optional)
+

@@ -1,0 +1,11 @@
+# Disaster Recovery & Business Continuity Scripts Dependencies
+
+# Failover Procedures Manager
+# No external dependencies (uses only stdlib: dataclasses, enum, json, subprocess, pathlib)
+
+# Note: Scripts may require system tools:
+# - kubectl (for Kubernetes operations)
+# - aws CLI (for AWS operations)
+# - curl (for health checks)
+# - PostgreSQL tools (pg_dump, pg_basebackup) for database backups
+
