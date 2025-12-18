@@ -17,7 +17,7 @@
 - `widget-test`
 - `integration-test`
 - `tdd` (Test-Driven Development)
-- `@skill:testing`
+- `@skill:integration-testing`
 
 ### Ejemplos de Prompts
 

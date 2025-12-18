@@ -80,34 +80,34 @@ Para más detalles sobre cada skill, consulta [AGENTS.md](AGENTS.md).
 
 ### 🎨 Flutter Skills (28)
 
-- `@skill:flutter/mvvm` - Patrón MVVM con separación clara entre UI y lógica de negocio
-- `@skill:flutter/clean-architecture` - Arquitectura en capas (Domain/Data/Presentation) con máxima testabilidad
-- `@skill:flutter/project-setup` - Configuración inicial estándar con análisis estático, flavors, temas y i18n
-- `@skill:flutter/testing` - Estrategia completa de testing: unit, widget e integration tests
-- `@skill:flutter/bloc-advanced` - State management con BLoC avanzado: Hydrated BLoC, Replay BLoC, transformers
-- `@skill:flutter/riverpod` - State management con Riverpod: providers, hooks, y gestión de estado reactiva
-- `@skill:flutter/feature-first` - Organización del código por features en lugar de capas técnicas
-- `@skill:flutter/modular-architecture` - Arquitectura modular con módulos independientes y reutilizables
-- `@skill:flutter/code-generation` - Automatización de código boilerplate con build_runner, freezed, json_serializable
-- `@skill:flutter/performance` - Optimización de rendimiento: profiling, memory leaks, rendering optimization
 - `@skill:flutter/accessibility` - Implementación de accesibilidad con semantic widgets y screen reader support
+- `@skill:flutter/analytics-tracking` - Analytics y tracking de eventos con Firebase Analytics, Mixpanel y Amplitude
 - `@skill:flutter/animation-motion` - Animaciones avanzadas con Rive, Lottie, Hero animations y AnimationController
-- `@skill:flutter/theming` - Sistema de diseño con múltiples temas, Material 3, dark mode y cambio dinámico
-- `@skill:flutter/i18n` - Soporte para múltiples idiomas con flutter_localizations, ARB files y formateo regional
+- `@skill:flutter/app-distribution` - Distribución de apps: TestFlight, Google Play Internal Testing, Firebase App Distribution
+- `@skill:flutter/bloc-advanced` - State management con BLoC avanzado: Hydrated BLoC, Replay BLoC, transformers
+- `@skill:flutter/clean-architecture` - Arquitectura en capas (Domain/Data/Presentation) con máxima testabilidad
+- `@skill:flutter/code-generation` - Automatización de código boilerplate con build_runner, freezed, json_serializable
+- `@skill:flutter/deep-linking` - Deep linking con universal links (iOS) y app links (Android) usando go_router
+- `@skill:flutter/error-tracking` - Monitoreo de errores con Sentry y Firebase Crashlytics
+- `@skill:flutter/feature-first` - Organización del código por features en lugar de capas técnicas
+- `@skill:flutter/feature-flags` - Feature flags y remote configuration con Firebase Remote Config y LaunchDarkly
 - `@skill:flutter/firebase` - Integración completa con Firebase: Auth, Firestore, Cloud Messaging y Analytics
 - `@skill:flutter/graphql` - Integración con GraphQL: queries, mutations, subscriptions en tiempo real
-- `@skill:flutter/offline-first` - Arquitectura offline-first con cache inteligente y sincronización bidireccional
-- `@skill:flutter/deep-linking` - Deep linking con universal links (iOS) y app links (Android) usando go_router
-- `@skill:flutter/push-notifications` - Push notifications con Firebase Cloud Messaging y local notifications
-- `@skill:flutter/analytics-tracking` - Analytics y tracking de eventos con Firebase Analytics, Mixpanel y Amplitude
-- `@skill:flutter/error-tracking` - Monitoreo de errores con Sentry y Firebase Crashlytics
-- `@skill:flutter/feature-flags` - Feature flags y remote configuration con Firebase Remote Config y LaunchDarkly
-- `@skill:flutter/in-app-purchases` - In-App Purchases y subscriptions con RevenueCat
-- `@skill:flutter/app-distribution` - Distribución de apps: TestFlight, Google Play Internal Testing, Firebase App Distribution
-- `@skill:flutter/platform-channels` - Comunicación bidireccional con código nativo: MethodChannel, EventChannel y FFI
+- `@skill:flutter/i18n` - Soporte para múltiples idiomas con flutter_localizations, ARB files y formateo regional
+- `@skill:flutter/integration-testing` - Estrategia completa de testing: unit, widget e integration tests
+- `@skill:flutter/mobile-testing` - Testing móvil automatizado con Mobile MCP: pruebas de integración en dispositivos reales, simuladores iOS y emuladores Android
+- `@skill:flutter/modular-architecture` - Arquitectura modular con módulos independientes y reutilizables
+- `@skill:flutter/mvvm` - Patrón MVVM con separación clara entre UI y lógica de negocio
 - `@skill:flutter/native-integration` - Integración profunda con APIs nativas de iOS (Swift/UIKit) y Android (Kotlin)
-- `@skill:flutter/webview-integration` - Integración de WebViews con flutter_inappwebview y JavaScript channels
+- `@skill:flutter/offline-first` - Arquitectura offline-first con cache inteligente y sincronización bidireccional
+- `@skill:flutter/performance` - Optimización de rendimiento: profiling, memory leaks, rendering optimization
+- `@skill:flutter/platform-channels` - Comunicación bidireccional con código nativo: MethodChannel, EventChannel y FFI
+- `@skill:flutter/project-setup` - Configuración inicial estándar con análisis estático, flavors, temas y i18n
+- `@skill:flutter/push-notifications` - Push notifications con Firebase Cloud Messaging y local notifications
+- `@skill:flutter/riverpod` - State management con Riverpod: providers, hooks, y gestión de estado reactiva
 - `@skill:flutter/security` - Mejores prácticas de seguridad: obfuscation, certificate pinning, secure storage
+- `@skill:flutter/theming` - Sistema de diseño con múltiples temas, Material 3, dark mode y cambio dinámico
+- `@skill:flutter/webview-integration` - Integración de WebViews con flutter_inappwebview y JavaScript channels
 
 ### 🚀 CI/CD Skills (9)
 
@@ -186,8 +186,7 @@ proyecto/
 │   │   ├── graphql/
 │   │   ├── i18n/
 │   │   ├── in-app-purchases/
-│   │   ├── mobile-integration-testing/
-│   │   │   └── scripts/
+│   │   ├── integration-testing/
 │   │   ├── mobile-testing/
 │   │   │   └── scripts/
 │   │   ├── modular-architecture/
@@ -201,7 +200,6 @@ proyecto/
 │   │   ├── push-notifications/
 │   │   ├── riverpod/
 │   │   ├── security/
-│   │   ├── testing/
 │   │   ├── theming/
 │   │   ├── webview-integration/
 │   │   ├── BEST_PRACTICES_MAPPING.md
