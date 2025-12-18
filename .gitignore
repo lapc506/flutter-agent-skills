@@ -9,6 +9,15 @@
 .history
 .svn/
 migrate_working_dir/
+logs/
+
+# Secrets
+.env
+*.key
+*.keystore
+*.jks
+key.properties
+id_rsa
 
 # IntelliJ related
 *.iml
@@ -18,6 +27,12 @@ migrate_working_dir/
 
 # VS Code related
 .vscode/
+
+# Node.js related
+node_modules/
+
+# Terraform related
+.terraform/
 
 # IDE-specific MCP configs (symlinks to root mcp.json)
 # Mantener solo mcp.json en la raíz
