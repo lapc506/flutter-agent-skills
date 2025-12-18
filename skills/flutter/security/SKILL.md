@@ -48,6 +48,8 @@ Protege API keys y implementa SSL pinning
 
 ## 📖 Descripción
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 Security en Flutter apps requiere múltiples capas de protección: desde code obfuscation y certificate pinning hasta secure storage y biometric authentication. Este skill cubre las mejores prácticas y técnicas esenciales para proteger aplicaciones Flutter en producción.
 
 ### ✅ Cuándo Usar Este Skill
@@ -237,14 +239,26 @@ android {
 #### 1.3 Flutter Obfuscation
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Build con obfuscation (Android)
+cd mobile
 flutter build apk --obfuscate --split-debug-info=build/app/outputs/symbols
+cd ..
 
 # Build con obfuscation (iOS)
+cd mobile
 flutter build ipa --obfuscate --split-debug-info=build/ios/outputs/symbols
+cd ..
 
 # Build AAB para Play Store
+cd mobile
 flutter build appbundle --obfuscate --split-debug-info=build/app/outputs/symbols --release
+cd ..
 ```
 
 #### 1.4 Script de Automatización
@@ -255,8 +269,14 @@ flutter build appbundle --obfuscate --split-debug-info=build/app/outputs/symbols
 
 echo "🔒 Building with obfuscation..."
 
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 PLATFORM=$1
-VERSION=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d'+' -f1)
+VERSION=$(grep 'version:' mobile/pubspec.yaml | awk '{print $2}' | cut -d'+' -f1)
 
 if [ -z "$PLATFORM" ]; then
     echo "Usage: ./scripts/obfuscate.sh [android|ios|all]"
@@ -265,20 +285,24 @@ fi
 
 build_android() {
     echo "📱 Building Android..."
+    cd mobile
     flutter build appbundle \
         --obfuscate \
         --split-debug-info=build/android/symbols/$VERSION \
         --release
+    cd ..
     
     echo "✅ Android build complete: build/app/outputs/bundle/release/"
 }
 
 build_ios() {
     echo "🍎 Building iOS..."
+    cd mobile
     flutter build ipa \
         --obfuscate \
         --split-debug-info=build/ios/symbols/$VERSION \
         --release
+    cd ..
     
     echo "✅ iOS build complete: build/ios/ipa/"
 }

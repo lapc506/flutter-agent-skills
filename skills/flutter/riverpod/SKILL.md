@@ -36,6 +36,8 @@ Implementa state management con riverpod para un módulo de productos
 
 ## 📖 Descripción
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 Riverpod es una reimplementación completa de Provider que soluciona muchas de sus limitaciones. Ofrece gestión de estado reactiva, compile-time safety, mejor testabilidad y eliminación de BuildContext para acceso a providers.
 
 ### ✅ Cuándo Usar Este Skill

@@ -39,6 +39,8 @@ Implementa state management con cubit para un módulo de productos
 
 BLoC (Business Logic Component) es un patrón de gestión de estado que separa la lógica de negocio de la UI mediante streams. Este skill cubre técnicas avanzadas como Hydrated BLoC para persistencia, Replay BLoC para debugging, transformers para control de eventos, y estrategias de testing exhaustivas.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - Aplicaciones enterprise con lógica compleja

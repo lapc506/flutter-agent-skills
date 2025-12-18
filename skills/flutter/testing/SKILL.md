@@ -37,6 +37,10 @@ Necesito unit-test y widget-test para la feature de usuarios
 
 Estrategia completa de testing para Flutter, incluyendo unit tests, widget tests, integration tests y mejores prácticas.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ## 🎯 Tipos de Testing
 
 ### 1. Unit Tests ⚡
@@ -306,10 +310,18 @@ dev_dependencies:
 ## 📊 Coverage
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Generar reporte de cobertura
+cd mobile
 flutter test --coverage
-genhtml coverage/lcov.info -o coverage/html
-open coverage/html/index.html
+cd ..
+genhtml mobile/coverage/lcov.info -o mobile/coverage/html
+open mobile/coverage/html/index.html
 ```
 
 ---

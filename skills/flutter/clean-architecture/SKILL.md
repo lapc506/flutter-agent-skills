@@ -38,6 +38,8 @@ Implementa clean-arch para un sistema de e-commerce con bloc
 
 ## 📖 Descripción
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 Clean Architecture organiza el código en capas con dependencias unidireccionales, facilitando la independencia del framework, testabilidad y mantenibilidad a largo plazo. Ideal para aplicaciones enterprise y proyectos escalables.
 
 ### ✅ Cuándo Usar Este Skill

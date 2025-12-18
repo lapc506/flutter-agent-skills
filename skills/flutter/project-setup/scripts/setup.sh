@@ -5,6 +5,13 @@
 
 set -e  # Salir si hay algún error
 
+# Cambiar al directorio raíz del proyecto
+# El script está en: skills/flutter/project-setup/scripts/
+# Necesitamos subir 3 niveles para llegar a la raíz del proyecto
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+cd "$PROJECT_ROOT"
+
 # Colores para output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -55,6 +62,26 @@ get_project_name() {
         PROJECT_NAME=${PROJECT_NAME:-my_flutter_app}
     fi
     print_info "Nombre del proyecto: $PROJECT_NAME"
+}
+
+# Obtener el nombre del paquete de la aplicación
+get_package_name() {
+    print_info "El nombre del paquete identifica tu aplicación de forma única (ej: com.miempresa.miapp)"
+    
+    # Generar nombre por defecto basado en el nombre del proyecto
+    DEFAULT_PACKAGE=$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | tr '_' '' | tr '-' '')
+    DEFAULT_PACKAGE="com.example.${DEFAULT_PACKAGE}"
+    
+    read -p "Ingresa el nombre del paquete (default: $DEFAULT_PACKAGE): " PACKAGE_NAME
+    PACKAGE_NAME=${PACKAGE_NAME:-$DEFAULT_PACKAGE}
+    
+    # Validar formato básico del nombre del paquete
+    if ! echo "$PACKAGE_NAME" | grep -qE '^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$'; then
+        print_warning "El nombre del paquete debe seguir el formato: com.ejemplo.miapp (solo letras minúsculas, números y puntos)"
+        print_info "Usando nombre por defecto: $PACKAGE_NAME"
+    fi
+    
+    print_info "Nombre del paquete: $PACKAGE_NAME"
 }
 
 # Crear estructura de directorios
@@ -116,12 +143,37 @@ install_dependencies() {
     print_info "Instalando dependencias de Flutter..."
     cd mobile
     
+    # Agregar change_app_package_name como dev_dependency
+    print_info "Agregando change_app_package_name como dependencia de desarrollo..."
+    if ! flutter pub add -d change_app_package_name; then
+        print_error "Error al agregar change_app_package_name"
+        cd ..
+        exit 1
+    fi
+    
     if flutter pub get; then
         print_success "Dependencias instaladas correctamente"
     else
         print_error "Error al instalar dependencias"
         cd ..
         exit 1
+    fi
+    
+    cd ..
+}
+
+# Cambiar el nombre del paquete usando change_app_package_name
+change_package_name() {
+    print_info "Cambiando el nombre del paquete a: $PACKAGE_NAME..."
+    cd mobile
+    
+    # Ejecutar el comando para cambiar el nombre del paquete
+    print_info "Ejecutando change_app_package_name..."
+    if dart run change_app_package_name:main "$PACKAGE_NAME"; then
+        print_success "Nombre del paquete cambiado exitosamente a: $PACKAGE_NAME"
+    else
+        print_warning "Hubo un problema al cambiar el nombre del paquete. Verifica manualmente."
+        print_info "Puedes cambiarlo manualmente más tarde usando: dart run change_app_package_name:main $PACKAGE_NAME"
     fi
     
     cd ..
@@ -249,6 +301,10 @@ print_summary() {
     echo "  ├── backend/          (directorio para tu backend)"
     echo "  └── mobile/           (proyecto Flutter)"
     echo ""
+    echo "Configuración aplicada:"
+    echo "  • Nombre del proyecto: $PROJECT_NAME"
+    echo "  • Nombre del paquete: $PACKAGE_NAME"
+    echo ""
     echo "Próximos pasos:"
     echo "  1. cd mobile"
     echo "  2. Copia .env-sample a .env y configura tus variables"
@@ -270,9 +326,11 @@ main() {
     
     check_flutter
     get_project_name
+    get_package_name
     create_structure
     create_flutter_project
     install_dependencies
+    change_package_name
     create_config_files
     create_mobile_readme
     print_summary

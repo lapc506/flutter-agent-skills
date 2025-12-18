@@ -40,6 +40,8 @@ Configura logging y monitoring completo
 
 ## 📖 Descripción
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 Este skill cubre la implementación de sistemas de monitoreo y tracking de errores en Flutter apps usando Sentry y Firebase Crashlytics. Incluye captura automática de errores, contexto enriquecido, breadcrumbs, y integración con CI/CD para source maps y debug symbols.
 
 ### ✅ Cuándo Usar Este Skill
@@ -807,8 +809,16 @@ class AppLogger {
 # scripts/upload_symbols_android.sh
 #!/bin/bash
 
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Build with debug symbols
+cd mobile
 flutter build appbundle --release
+cd ..
 
 # Upload to Crashlytics
 firebase crashlytics:symbols:upload \
@@ -901,9 +911,17 @@ flutterfire configure
 ### Missing Debug Symbols
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Build with debug symbols
+cd mobile
 flutter build apk --split-debug-info=build/symbols
 flutter build appbundle --split-debug-info=build/symbols
+cd ..
 ```
 
 ## 📚 Recursos

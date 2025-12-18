@@ -51,6 +51,8 @@ Agrega herramientas de análisis de código y seguridad
 
 Skill para configurar y utilizar herramientas de análisis estático de código que detectan errores, vulnerabilidades de seguridad, problemas de calidad y code smells antes de que el código llegue a producción. Incluye linting para múltiples lenguajes (Dart, Python, Go, Bash, PowerShell, Rust, JavaScript/Node.js), integración con herramientas nativas, plataformas de seguridad como Datadog y herramientas de revisión de código con IA como CodeRabbit.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - Necesitas detectar errores y vulnerabilidades temprano
@@ -87,24 +89,48 @@ Herramientas nativas de Dart para análisis estático de código.
 
 #### Comandos Principales
 
+**⚠️ IMPORTANTE: Siempre ejecutar desde la raíz del proyecto (donde está el directorio `mobile/`)**
+
 ```bash
-# Análisis estático básico
+# Verificar que estás en la raíz del proyecto
+# Debe existir el directorio mobile/
+if [ ! -d "mobile" ]; then
+    echo "Error: Debes ejecutar este comando desde la raíz del proyecto"
+    exit 1
+fi
+
+# Análisis estático básico (desde la raíz, apuntando a mobile/)
+cd mobile
 dart analyze
+cd ..
+
+# O desde la raíz directamente
+dart analyze mobile/lib/
 
 # Análisis con salida JSON
+cd mobile
 dart analyze --format=json
+cd ..
 
 # Análisis con fatal-infos (falla si hay infos)
+cd mobile
 dart analyze --fatal-infos
+cd ..
 
 # Análisis de un directorio específico
+cd mobile
 dart analyze lib/
+cd ..
 
 # Verificar formato de código
+cd mobile
 dart format --set-exit-if-changed .
+cd ..
 
 # Auto-formatear código
+cd mobile
 dart format .
+cd ..
 ```
 
 #### Configuración: analysis_options.yaml
@@ -544,24 +570,33 @@ Herramientas de análisis estático para scripts PowerShell.
 
 #### Comandos Principales
 
-```powershell
-# Análisis estático con PSScriptAnalyzer
-Invoke-ScriptAnalyzer -Path script.ps1
+**⚠️ IMPORTANTE: Siempre ejecutar desde la raíz del proyecto (donde está el directorio `mobile/`)**
 
-# Análisis recursivo
-Get-ChildItem -Recurse -Filter *.ps1 | Invoke-ScriptAnalyzer
+```powershell
+# Verificar que estás en la raíz del proyecto
+# Debe existir el directorio mobile/
+if (-not (Test-Path "mobile")) {
+    Write-Error "Error: Debes ejecutar este comando desde la raíz del proyecto"
+    exit 1
+}
+
+# Análisis estático con PSScriptAnalyzer (desde la raíz)
+Invoke-ScriptAnalyzer -Path scripts/*.ps1
+
+# Análisis recursivo de scripts
+Get-ChildItem -Path scripts -Recurse -Filter *.ps1 | Invoke-ScriptAnalyzer
 
 # Con configuración personalizada
-Invoke-ScriptAnalyzer -Path script.ps1 -Settings .vscode/PSScriptAnalyzerSettings.psd1
+Invoke-ScriptAnalyzer -Path scripts/setup.ps1 -Settings .vscode/PSScriptAnalyzerSettings.psd1
 
 # Solo errores y warnings
-Invoke-ScriptAnalyzer -Path script.ps1 -Severity Error, Warning
+Invoke-ScriptAnalyzer -Path scripts/*.ps1 -Severity Error, Warning
 
 # Exportar a JSON
-Invoke-ScriptAnalyzer -Path script.ps1 | ConvertTo-Json | Out-File report.json
+Invoke-ScriptAnalyzer -Path scripts/*.ps1 | ConvertTo-Json | Out-File report.json
 
 # Análisis con reglas específicas
-Invoke-ScriptAnalyzer -Path script.ps1 -IncludeRule PSPlaceOpenBrace, PSPlaceCloseBrace
+Invoke-ScriptAnalyzer -Path scripts/*.ps1 -IncludeRule PSPlaceOpenBrace, PSPlaceCloseBrace
 ```
 
 #### Configuración: PSScriptAnalyzerSettings.psd1
@@ -1490,9 +1525,35 @@ coderabbit review --range HEAD~1..HEAD
 
 ## 🎓 Ejemplos de Uso
 
+### ⚠️ Regla Fundamental: Verificar Directorio de Trabajo
+
+**Todos los comandos deben ejecutarse desde la raíz del proyecto** (donde existe el directorio `mobile/`). Los skills deben incluir esta verificación:
+
+```bash
+# Verificación en Bash
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+```
+
+```powershell
+# Verificación en PowerShell
+if (-not (Test-Path "mobile")) {
+    Write-Error "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+```
+
 ### Ejemplo 1: Setup Multi-Lenguaje Completo
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # 1. Instalar herramientas de linting
 
 # Python
@@ -1527,8 +1588,14 @@ pre-commit run --all-files
 ### Ejemplo 2: Setup Inicial Completo (Dart)
 
 ```bash
-# 1. Crear analysis_options.yaml
-cat > analysis_options.yaml << EOF
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
+# 1. Crear analysis_options.yaml en mobile/
+cat > mobile/analysis_options.yaml << EOF
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
@@ -1556,8 +1623,10 @@ rules:
     - performance
 EOF
 
-# 4. Verificar análisis
+# 4. Verificar análisis (desde la raíz)
+cd mobile
 dart analyze
+cd ..
 coderabbit review --all
 ```
 

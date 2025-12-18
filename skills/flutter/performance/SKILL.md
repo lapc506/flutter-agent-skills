@@ -37,6 +37,10 @@ Reduce el rebuild y mejora el rendering
 
 Performance Optimization cubre técnicas para mejorar velocidad, fluidez y eficiencia de apps Flutter: reducir rebuilds, optimizar listas, gestión de memoria, lazy loading, code splitting, image optimization y profiling.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - App tiene lag o stuttering
@@ -558,8 +562,16 @@ void navigateToSettings() async {
 flutter pub global activate devtools
 flutter pub global run devtools
 
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Ejecutar app en profile mode
+cd mobile
 flutter run --profile
+cd ..
 
 # Performance overlay en código
 void main() {
@@ -574,14 +586,26 @@ void main() {
 ### 2. Build Mode Correcto
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Debug (desarrollo) - Sin optimizaciones
+cd mobile
 flutter run
+cd ..
 
 # Profile (testing performance) - Optimizado pero con DevTools
+cd mobile
 flutter run --profile
+cd ..
 
 # Release (producción) - Totalmente optimizado
+cd mobile
 flutter run --release
+cd ..
 ```
 
 ### 3. Avoid Doing Work in Build

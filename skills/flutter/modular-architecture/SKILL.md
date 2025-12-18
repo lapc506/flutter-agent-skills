@@ -36,6 +36,8 @@ Implementa módulos independientes para auth y productos
 
 ## 📖 Descripción
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 La Arquitectura Modular divide la aplicación en módulos independientes y reutilizables, cada uno con su propia lógica, UI, rutas y dependencias. Cada módulo puede funcionar de manera autónoma y ser desarrollado, testeado y desplegado independientemente.
 
 ### ✅ Cuándo Usar Este Skill
@@ -280,23 +282,23 @@ command:
 scripts:
   analyze:
     run: melos exec -- flutter analyze
-    description: Run flutter analyze in all packages
+    description: Run flutter analyze in all packages (ejecutar desde raíz del proyecto)
     
   test:
     run: melos exec -- flutter test
-    description: Run tests in all packages
+    description: Run tests in all packages (ejecutar desde raíz del proyecto)
     
   format:
     run: melos exec -- dart format . --set-exit-if-changed
-    description: Format all packages
+    description: Format all packages (ejecutar desde raíz del proyecto)
     
   clean:
     run: melos exec -- flutter clean
-    description: Clean all packages
+    description: Clean all packages (ejecutar desde raíz del proyecto)
     
   get:
     run: melos exec -- flutter pub get
-    description: Get dependencies for all packages
+    description: Get dependencies for all packages (ejecutar desde raíz del proyecto)
 ```
 
 ## 💻 Implementación

@@ -35,6 +35,8 @@ Organiza el proyecto con estructura feature-first
 
 ## 📖 Descripción
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 Feature-First Architecture organiza el código por features en lugar de por capas técnicas. Cada feature contiene todo lo necesario (UI, lógica, datos) en una carpeta auto-contenida, facilitando la navegación y el mantenimiento del código.
 
 ### ✅ Cuándo Usar Este Skill
@@ -384,7 +386,8 @@ Future<void> configureDependencies() async {
 
 ```dart
 // lib/core/di/injection.config.dart (generado)
-// Ejecutar: dart run build_runner build --delete-conflicting-outputs
+// Ejecutar desde la raíz del proyecto:
+// cd mobile && dart run build_runner build --delete-conflicting-outputs && cd ..
 ```
 
 ### 3. Feature: Authentication

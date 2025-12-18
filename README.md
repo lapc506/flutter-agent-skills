@@ -6,7 +6,7 @@ El objetivo principal de esta plantilla es que puedas comenzar a trabajar rápid
 
 ## ¿Qué es esto?
 
-Esta es una plantilla de boilerplate simple para crear una aplicación Flutter lista para producción con generación de iconos/splash screen, boilerplate REST, y reportes (analytics, performance y crash reporting) todo configurado para ti.
+Esta es una plantilla de boilerplate simple para crear una aplicación Flutter.
 
 **Además, este proyecto incluye un sistema de Agent Skills** que proporciona conocimiento contextual y capacidades especializadas a los asistentes de IA. Los skills agénticos cubren desde patrones arquitectónicos (MVVM, Clean Architecture) hasta integraciones avanzadas (Firebase, GraphQL, CI/CD) y pueden invocarse automáticamente o explícitamente durante el desarrollo.
 
@@ -14,7 +14,7 @@ Puedes usar este boilerplate como base y aprovechar los skills agénticos para g
 
 ## ¿Qué NO es esto?
 
-Dado que todos tienen opiniones muy fuertes sobre State Management y Arquitectura de Apps, esta plantilla no toma ninguna postura sobre estos temas por defecto.
+Dado que cada desarrollador puede tener opiniones muy fuertes sobre State Management y Arquitectura de Apps, esta plantilla no toma ninguna postura sobre estos temas por defecto.
 
 Por lo tanto, esto NO es tu plantilla de state management y arquitectura de app pre-configurada. Sin embargo, **los skills agénticos sí incluyen guías detalladas** para implementar diferentes patrones arquitectónicos (MVVM, Clean Architecture, Feature-First, Modular) y sistemas de gestión de estado (BLoC, Riverpod, Provider), permitiéndote elegir e implementar el enfoque que prefieras con la ayuda de los agentes de IA.
 
@@ -22,20 +22,116 @@ O haz fork del repo, personaliza la plantilla a tu gusto y hazla tuya.
 
 Dicho esto, los skills agénticos están diseñados para evolucionar y pueden combinarse según tus necesidades específicas.
 
-## Estructura del Proyecto
-
-Este proyecto está organizado como un monorepo con la siguiente estructura:
+## Ejemplo de Estructura del Monorepo
 
 ```
 proyecto/
-├── backend/          # Backend REST API
-│   └── ...
-├── mobile/           # Aplicación Flutter (raíz del proyecto Flutter)
+├── backend/              # Backend REST API
+│   ├── src/
+│   ├── tests/
+│   └── package.json
+├── mobile/               # Aplicación Flutter
 │   ├── android/
 │   ├── ios/
 │   ├── lib/
+│   │   ├── core/
+│   │   ├── features/
+│   │   ├── shared/
+│   │   └── main.dart
 │   ├── test/
-│   └── pubspec.yaml
+│   ├── assets/
+│   │   ├── icon/
+│   │   └── splash/
+│   ├── pubspec.yaml
+│   └── .env-sample
+├── skills/               # Agent Skills para asistentes de IA
+│   ├── flutter/          # Skills de Flutter (28 skills)
+│   │   ├── accessibility/
+│   │   ├── analytics-tracking/
+│   │   ├── animation-motion/
+│   │   ├── app-distribution/
+│   │   ├── bloc-advanced/
+│   │   ├── clean-architecture/
+│   │   ├── code-generation/
+│   │   ├── deep-linking/
+│   │   ├── error-tracking/
+│   │   ├── feature-first/
+│   │   ├── feature-flags/
+│   │   ├── firebase/
+│   │   ├── graphql/
+│   │   ├── i18n/
+│   │   ├── in-app-purchases/
+│   │   ├── mobile-integration-testing/
+│   │   │   └── scripts/
+│   │   ├── mobile-testing/
+│   │   │   └── scripts/
+│   │   ├── modular-architecture/
+│   │   ├── mvvm/
+│   │   ├── native-integration/
+│   │   ├── offline-first/
+│   │   ├── performance/
+│   │   ├── platform-channels/
+│   │   ├── project-setup/
+│   │   │   └── scripts/
+│   │   ├── push-notifications/
+│   │   ├── riverpod/
+│   │   ├── security/
+│   │   ├── testing/
+│   │   ├── theming/
+│   │   ├── webview-integration/
+│   │   ├── BEST_PRACTICES_MAPPING.md
+│   │   └── flutter-best-practices.md
+│   ├── cicd/             # Skills de CI/CD (9 skills)
+│   │   ├── ansible-awx/
+│   │   ├── argocd/
+│   │   ├── aws/
+│   │   ├── azure/
+│   │   ├── crossplane/
+│   │   ├── gcp/
+│   │   ├── github-actions/
+│   │   ├── ovhcloud/
+│   │   ├── terraform/
+│   │   └── README.md
+│   ├── figma/            # Design Integration Skills
+│   │   └── SKILL.md
+│   ├── static-analysis/  # Static Analysis Skills
+│   │   └── SKILL.md
+│   ├── system-reliability-engineering/  # SRE Skills (14 skills)
+│   │   ├── alerting-incident-management/
+│   │   ├── api-gateway-rate-limiting/
+│   │   │   └── scripts/
+│   │   ├── chaos-engineering/
+│   │   │   └── scripts/
+│   │   ├── container-security/
+│   │   │   └── scripts/
+│   │   ├── cost-optimization-finops/
+│   │   │   └── scripts/
+│   │   ├── database-reliability/
+│   │   │   └── scripts/
+│   │   ├── disaster-recovery-business-continuity/
+│   │   │   └── scripts/
+│   │   ├── load-testing-performance/
+│   │   │   └── scripts/
+│   │   ├── logging-log-aggregation/
+│   │   │   └── scripts/
+│   │   ├── network-policies-security/
+│   │   │   └── scripts/
+│   │   ├── observability-stack/
+│   │   │   └── scripts/
+│   │   ├── post-mortem/
+│   │   ├── security-compliance-automation/
+│   │   │   └── scripts/
+│   │   ├── service-mesh/
+│   │   │   └── scripts/
+│   │   └── slo-sli-sla/
+│   │       ├── examples/
+│   │       └── scripts/
+│   ├── CHANGELOG.md
+│   ├── CONTRIBUTING.md
+│   ├── LICENSE
+│   ├── MCP_SETUP.md
+│   ├── README.md
+│   └── gemini-extension.json
 └── README.md
 ```
 
@@ -50,93 +146,35 @@ proyecto/
 
 ### Inicialización Rápida
 
-#### Windows (PowerShell)
+Puedes inicializar el proyecto de dos formas:
+
+#### Opción 1: Usando el Skill Agéntico (Recomendado)
+
+Invoca el skill `@skill:flutter-project-setup` con tu asistente de IA para obtener una configuración guiada y personalizada del proyecto.
+
+#### Opción 2: Usando Scripts Automatizados
+
+Este proyecto incluye scripts automatizados que forman parte del skill `project-setup`:
+
+**Windows (PowerShell):**
 
 ```powershell
-.\scripts\setup.ps1
+.\skills\flutter\project-setup\scripts\setup.ps1
 ```
 
-#### Linux/macOS (Bash)
+**Linux/macOS (Bash):**
 
 ```bash
-chmod +x scripts/setup.sh
-./scripts/setup.sh
+chmod +x skills/flutter/project-setup/scripts/setup.sh
+./skills/flutter/project-setup/scripts/setup.sh
 ```
 
 Los scripts de setup realizarán automáticamente:
-1. Creación de la estructura del monorepo
-2. Inicialización del proyecto Flutter en `mobile/`
-3. Instalación de dependencias
-4. Configuración básica del proyecto
-
-### Configuración Manual
-
-Si prefieres configurar el proyecto manualmente:
-
-1. **Obtener la plantilla**
-   - Clona este repositorio a tu máquina local
-   - O usa el botón "Use this template" en GitHub
-
-2. **Instalar dependencias**
-   ```bash
-   cd mobile
-   flutter pub get
-   ```
-
-3. **Nombre del Bundle de la Aplicación**
-   Para cambiar el nombre del paquete/bundle identifier en los manifiestos de Android e iOS, ejecuta:
-   ```bash
-   flutter pub run change_app_package_name:main <com.nuevo.paquete.nombre>
-   ```
-   - Este paso usa `change_app_package_name`, dale un poco de amor al paquete.
-
-4. **Nombre de la Aplicación**
-   A continuación, necesitarás cambiar la etiqueta legible de tu app - el `CFBundleName` y/o `CFBundleDisplayName` dentro del `Info.plist` (para iOS) y el campo `android:label` en el nodo de aplicación en `AndroidManifest.xml` (para Android).
-   
-   Lamentablemente, este paso es manual; sería genial si `change_app_package_name` pudiera hacer esto por ti.
-   
-   **NOTA**: También necesitarás cambiar el `name` y `description` del paquete dentro de `pubspec.yaml`
-
-5. **Iconos de la App**
-   Luego generaremos automáticamente los iconos del launcher de tu app usando el paquete `flutter_launcher_icons`.
-   - Copia la imagen que quieres usar como iconos del launcher a `mobile/assets/icon/icon.png`.
-   - Ahora ejecuta `flutter pub run flutter_launcher_icons`. Este comando generará automáticamente los iconos del launcher de Android e iOS desde el archivo PNG para los diferentes DPIs y los colocará en sus respectivos directorios de recursos.
-   
-   **NOTA**: Consulta la documentación del paquete para más opciones de configuración sobre la generación de iconos del launcher actualizando tu `pubspec.yaml` en consecuencia. Por ejemplo, puedes querer diferentes iconos para diferentes plataformas ya que Android te permite usar un icono transparente e iOS no. Sin embargo, la configuración predeterminada incluida en esta plantilla será suficiente en la mayoría de los casos.
-
-6. **Splash Screen**
-   Luego generaremos splash screens nativos para ambas plataformas que tu app mostrará antes de que la carga se complete, y para esto usaremos `flutter_native_splash`.
-   - Copia la imagen que quieres que se muestre en el centro de tu splash screen a `mobile/assets/splash/splash.png`.
-   - Para cambiar el color de fondo de tu splash screen, ve a tu `pubspec.yaml` bajo `flutter_native_splash -> color` y pon tu código de color preferido. El predeterminado es blanco.
-   - Finalmente, ejecuta `flutter pub run flutter_native_splash:create` para generar tus recursos desde la imagen del splash y actualizar tus archivos de manifiesto.
-
-7. **Variables de Entorno**
-   Haremos uso del paquete `envied` para cargar la configuración de la app desde archivos `.env`. Esto nos permitirá cambiar fácilmente entre diferentes configuraciones de app cuando ejecutemos la app bajo diferentes entornos como producción, staging o modos de debug.
-   
-   Todos los archivos `.env` pueden colocarse en el directorio raíz de tu proyecto. Para configurar un nuevo entorno, crea un nuevo archivo con extensión `.env` (ej. `.env` o `debug.env` o `staging.env`), luego copia el contenido de `.env-sample` y complétalo según sea necesario.
-   
-   El archivo `mobile/lib/env.dart` importa las variables de entorno a la app. Consulta la documentación para entender cómo usar el paquete `envied`.
-   
-   Para ofuscar y ocultar variables ENV sensibles usa el atributo `obfuscate` así: `@EnviedField(obfuscate: true)`.
-   
-   **NOTA:** Todos los archivos `.env` (y el archivo `env.g.dart` de `envied`) están `.gitignored` por defecto ya que pueden contener información sensible como rutas, claves, etc. Para especificar nuevas claves de env agrégalas al archivo `.env-sample`, que será copiado por otros desarrolladores y se proporcionará la configuración correspondiente.
-
-8. **Firebase Reporting**
-   En este paso, vamos a integrar diferentes herramientas de reporte de Firebase en tu app, incluyendo Firebase Analytics, Firebase Performance y Crashlytics.
-   - Crea tu proyecto de Firebase en la Firebase Console
-   - Descarga tu `GoogleService-Info.plist` y `google-services.json` y colócalos en sus carpetas correspondientes para iOS y Android. He `.gitignore'd` estos archivos para que no los tengas, por casualidad, en tu VCS por error.
-   - Bueno, eso es todo. ¡Ya terminaste! No se necesita más configuración; ya lo he hecho por ti.
-   
-   **NOTAS:**
-   - Todos los servicios de Firebase que estamos usando en este proyecto son gratuitos - al menos al momento de escribir esto - por lo que no generarán ningún cargo.
-   - Con este paso, también habremos integrado Firebase Performance Monitoring en tu Cliente HTTP usando `dio_firebase_performance` que es un Interceptor de Dio que medirá el rendimiento de todas tus llamadas HTTP y reportará las estadísticas a Firebase.
-
-9. **TODOs**
-   Localiza cualquier `TODO` dentro de la carpeta `mobile/lib` y resuélvelos.
-
-10. **¡A trabajar!**
-
-Ahora ve a trabajar en tu app. ¡Feliz hacking!
+1. Verificación de instalación de Flutter
+2. Creación de la estructura del monorepo (`backend/` y `mobile/`)
+3. Inicialización del proyecto Flutter en `mobile/`
+4. Instalación de dependencias
+5. Configuración básica del proyecto (`.env-sample`, `.gitignore`, README)
 
 ## Despliegue
 
@@ -144,24 +182,6 @@ Antes de lanzar tu app de Android, asegúrate de firmarla:
 
 1. Genera un archivo Keystore si aún no tienes uno. Si tienes uno, ignora este paso y ve al siguiente.
 2. Ve a `mobile/android/key.properties` e incluye la ruta de tu Keystore, alias y contraseña.
-
-## Paquetes Utilizados
-
-* `change_app_package_name` - Cambia el nombre del paquete de la app con un solo comando. Hace el proceso muy fácil y rápido.
-* `dio` - El mejor Cliente HTTP para Flutter en mi opinión. Interceptores reutilizables, ¿verdad?
-* `dio_http_cache` - Interceptor de Dio para cachear requests. Intercepta requests para responder con datos cacheados o intercepta nuevas respuestas remotas para ser cacheadas. Muy configurable.
-* `dio_log` - Es un Interceptor de Dio que presenta tus logs de request y response dentro de la UI de tu app
-* `envied` - Carga configuración desde un archivo `.env`.
-* `firebase_analytics` - Plugin de Flutter para Google Analytics for Firebase, una solución de medición de apps que proporciona información sobre el uso de la app y el compromiso del usuario en Android e iOS.
-* `firebase_crashlytics` - Plugin de Flutter para Firebase Crashlytics. Reporta errores no capturados a la consola de Firebase.
-* `firebase_performance` - Plugin de Flutter para Google Performance Monitoring for Firebase, una solución de medición que monitorea trazas y requests de red HTTP/S en Android e iOS.
-* `firebase_performance_dio` - Implementación del Interceptor de Dio que envía datos de métricas de requests HTTP a Firebase.
-* `flutter_launcher_icons` - Una herramienta de línea de comandos que simplifica la tarea de actualizar el icono del launcher de tu app Flutter.
-* `flutter_native_splash` - Genera automáticamente código nativo para agregar splash screens en Android e iOS. Personaliza con una plataforma específica, color de fondo e imagen de splash.
-* `freezed` - Generador de código simple pero poderoso para clases inmutables con todas las cosas buenas como unions/pattern-matching/copy etc. Hecho por Remi Rousselet, el creador y mantenedor de Provider. Puede trabajar con `json_serializable` para todas tus necesidades de `fromJson()` y `toJson()`.
-* `go_router` - Este paquete se construye sobre la API de Router del framework de Flutter y proporciona APIs convenientes basadas en URL para navegar entre diferentes pantallas.
-* `screenshots` - Screenshots es una utilidad de línea de comandos independiente y paquete para capturar imágenes de screenshot para Flutter.
-* `pretty_dio_logger` - Interceptor de Dio que imprime de manera bonita a la consola los requests y responses HTTP que pasan por Dio
 
 ## Skills Agénticos Disponibles
 
@@ -219,34 +239,6 @@ Para más detalles sobre cada skill, consulta [AGENTS.md](AGENTS.md).
 ### 🔍 Static Analysis Skills (1)
 
 1. Static Analysis
-
-## Estructura del Monorepo
-
-```
-proyecto/
-├── backend/              # Backend REST API
-│   ├── src/
-│   ├── tests/
-│   └── package.json
-├── mobile/               # Aplicación Flutter
-│   ├── android/
-│   ├── ios/
-│   ├── lib/
-│   │   ├── core/
-│   │   ├── features/
-│   │   ├── shared/
-│   │   └── main.dart
-│   ├── test/
-│   ├── assets/
-│   │   ├── icon/
-│   │   └── splash/
-│   ├── pubspec.yaml
-│   └── .env-sample
-├── scripts/              # Scripts de utilidad
-│   ├── setup.sh
-│   └── setup.ps1
-└── README.md
-```
 
 ## Desarrollo
 

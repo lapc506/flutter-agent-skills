@@ -40,6 +40,10 @@ Automatiza pruebas en iOS simulator para la feature de productos
 
 Mobile Testing proporciona automatización de pruebas de integración para aplicaciones Flutter usando el servidor MCP de [Mobile Next](https://github.com/mobile-next/mobile-mcp). Permite ejecutar pruebas automatizadas en dispositivos reales, simuladores iOS y emuladores Android, automatizando interacciones de UI, validación de flujos completos y verificación de comportamiento en diferentes plataformas.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - Pruebas de integración end-to-end en dispositivos móviles
@@ -232,8 +236,16 @@ emulator -list-avds
 # Iniciar un emulador específico desde Android SDK
 $ANDROID_HOME/emulator/emulator -avd Pixel_5_API_33 &
 
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # O usando Flutter (inicia automáticamente si no está corriendo)
+cd mobile
 flutter run -d emulator-5554
+cd ..
 ```
 
 **Nota:** Flutter puede iniciar automáticamente el emulador si no está corriendo cuando ejecutas `flutter run`. Para crear nuevos AVDs, usa Android Studio > Device Manager o el comando `avdmanager`.
@@ -695,11 +707,21 @@ testWidgets('Test 2', (tester) async {
 ### Comando Básico
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Ejecutar todos los tests de integración
+cd mobile
 flutter test integration_test/
+cd ..
 
 # Ejecutar un test específico
+cd mobile
 flutter test integration_test/mobile/test_flows/auth_flow_test.dart
+cd ..
 ```
 
 ### Con Dispositivo Específico
@@ -712,8 +734,16 @@ flutter devices
 # Iniciar simulador (si no está corriendo)
 xcrun simctl boot "iPhone 16"
 
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Ejecutar tests en simulador específico
+cd mobile
 flutter test integration_test/ --device-id=<device-id>
+cd ..
 # Ejemplo: flutter test integration_test/ --device-id=00008030-001A4D1234567890
 ```
 
@@ -729,15 +759,25 @@ $ANDROID_HOME/emulator/emulator -avd Pixel_5_API_33 &
 # Esperar a que el emulador esté listo (verificar con flutter devices)
 flutter devices
 
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Ejecutar tests en el emulador
+cd mobile
 flutter test integration_test/ --device-id=emulator-5554
+cd ..
 
 # Opción 2: Flutter iniciará el emulador automáticamente si está configurado
 # Primero verifica que el AVD existe:
 $ANDROID_HOME/emulator/emulator -list-avds
 
 # Luego ejecuta los tests (Flutter iniciará el emulador si no está corriendo)
+cd mobile
 flutter test integration_test/ --device-id=emulator-5554
+cd ..
 ```
 
 **Verificar dispositivos conectados:**
@@ -754,8 +794,16 @@ flutter devices
 ### Con Screenshots
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Habilitar screenshots
+cd mobile
 flutter test integration_test/ --screenshots
+cd ..
 ```
 
 ## 📚 Recursos Adicionales

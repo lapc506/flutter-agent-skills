@@ -36,6 +36,8 @@ Implementa internacionalización con español e inglés
 
 ## 📖 Descripción
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 Internacionalización (i18n) y Localización (l10n) permiten que tu app soporte múltiples idiomas y regiones. Este skill cubre el uso de `flutter_localizations` con ARB files, cambio dinámico de idioma, formateo de fechas/números, y plurales.
 
 ### ✅ Cuándo Usar Este Skill
@@ -83,19 +85,18 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   
-  # Generación de código para i18n
-  intl: ^0.19.0
+  # intl está incluido automáticamente con flutter_localizations
+  # No es necesario especificarlo manualmente, Flutter lo pinnea automáticamente
   
   # State management para cambio de idioma (opcional)
   flutter_bloc: ^8.1.3
   # O
   riverpod: ^2.4.9
-
-dev_dependencies:
-  flutter_gen: ^5.4.0
+  # O
+  shared_preferences: ^2.2.2  # Para persistir preferencia de idioma
 ```
 
-### Configuración en pubspec.yaml
+### Configuración en mobile/pubspec.yaml
 
 ```yaml
 flutter:
@@ -104,6 +105,8 @@ flutter:
 ```
 
 ### l10n.yaml
+
+**⚠️ IMPORTANTE:** Este archivo debe estar en la raíz del proyecto Flutter (`mobile/l10n.yaml`), no en `lib/`.
 
 ```yaml
 arb-dir: lib/l10n
@@ -114,7 +117,35 @@ synthetic-package: false
 output-class: AppLocalizations
 ```
 
+**Nota:** Cuando usas `l10n.yaml` con `arb-dir: lib/l10n`, los archivos generados se crean directamente en `lib/l10n/app_localizations.dart`, **NO** en `flutter_gen/gen_l10n/`. El import correcto es:
+
+```dart
+import 'package:tu_app/l10n/app_localizations.dart';
+// O si estás en lib/:
+import 'l10n/app_localizations.dart';
+```
+
 ## 💻 Implementación
+
+### 0. Generar Archivos de Localización
+
+Después de crear los archivos ARB y configurar `l10n.yaml`, ejecuta:
+
+**Windows (PowerShell):**
+```powershell
+# Desde la raíz del proyecto (donde está mobile/)
+Push-Location mobile; flutter gen-l10n; Pop-Location
+```
+
+**Linux/macOS (Bash):**
+```bash
+# Desde la raíz del proyecto (donde está mobile/)
+cd mobile && flutter gen-l10n
+```
+
+**⚠️ IMPORTANTE:** 
+- Los archivos generados se crearán en `lib/l10n/app_localizations.dart` (no en `flutter_gen/gen_l10n/`) cuando usas `l10n.yaml` con `arb-dir: lib/l10n`.
+- En Windows, usa `Push-Location` y `Pop-Location` en lugar de `cd` para evitar problemas con rutas duplicadas.
 
 ### 1. ARB Files (Application Resource Bundle)
 
@@ -276,7 +307,7 @@ output-class: AppLocalizations
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tu_app/l10n/app_localizations.dart';  // Ajusta 'tu_app' al nombre de tu paquete
 
 void main() {
   runApp(const MyApp());
@@ -299,13 +330,15 @@ class MyApp extends StatelessWidget {
       ],
       
       // Idiomas soportados
-      supportedLocales: const [
-        Locale('en', ''), // Inglés
-        Locale('es', ''), // Español
-        Locale('fr', ''), // Francés
-        Locale('de', ''), // Alemán
-        Locale('pt', ''), // Portugués
-      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      // O manualmente:
+      // supportedLocales: const [
+      //   Locale('en', ''), // Inglés
+      //   Locale('es', ''), // Español
+      //   Locale('fr', ''), // Francés
+      //   Locale('de', ''), // Alemán
+      //   Locale('pt', ''), // Portugués
+      // ],
       
       // Idioma por defecto
       locale: const Locale('en'),
@@ -333,7 +366,7 @@ class MyApp extends StatelessWidget {
 ```dart
 // lib/features/home/presentation/screens/home_screen.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tu_app/l10n/app_localizations.dart';  // Ajusta 'tu_app' al nombre de tu paquete
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -466,7 +499,7 @@ class LocaleCubit extends Cubit<Locale> {
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tu_app/l10n/app_localizations.dart';  // Ajusta 'tu_app' al nombre de tu paquete
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -498,13 +531,15 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             
-            supportedLocales: const [
-              Locale('en'),
-              Locale('es'),
-              Locale('fr'),
-              Locale('de'),
-              Locale('pt'),
-            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            // O manualmente:
+            // supportedLocales: const [
+            //   Locale('en'),
+            //   Locale('es'),
+            //   Locale('fr'),
+            //   Locale('de'),
+            //   Locale('pt'),
+            // ],
             
             locale: locale,  // Idioma actual desde BLoC
             
@@ -523,7 +558,7 @@ class MyApp extends StatelessWidget {
 // lib/core/widgets/language_selector.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tu_app/l10n/app_localizations.dart';  // Ajusta 'tu_app' al nombre de tu paquete
 import '../localization/locale_cubit.dart';
 
 class LanguageSelector extends StatelessWidget {
@@ -724,6 +759,45 @@ class ProductCard extends StatelessWidget {
     }
   }
 }
+```
+
+## ⚠️ Notas Importantes
+
+### Ubicación de Archivos Generados
+
+Cuando usas `l10n.yaml` con la configuración:
+```yaml
+arb-dir: lib/l10n
+output-localization-file: app_localizations.dart
+```
+
+Los archivos generados se crean en:
+- `lib/l10n/app_localizations.dart`
+- `lib/l10n/app_localizations_en.dart`
+- `lib/l10n/app_localizations_es.dart`
+- etc.
+
+**NO** se crean en `flutter_gen/gen_l10n/` a menos que uses `flutter_gen` como herramienta separada.
+
+### Imports Correctos
+
+```dart
+// ✅ CORRECTO - Cuando usas l10n.yaml con arb-dir: lib/l10n
+import 'package:tu_app/l10n/app_localizations.dart';
+
+// ❌ INCORRECTO - Solo si usas flutter_gen como herramienta separada
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+```
+
+### Comandos de Generación
+
+```bash
+# Desde la raíz del proyecto (donde está mobile/)
+cd mobile
+flutter gen-l10n
+
+# O desde la raíz usando Push-Location (PowerShell)
+Push-Location mobile; flutter gen-l10n; Pop-Location
 ```
 
 ## 📚 Recursos Adicionales

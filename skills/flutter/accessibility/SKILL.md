@@ -43,6 +43,8 @@ Configura talkback y voiceover support
 
 Este skill cubre la implementación de accesibilidad en Flutter apps siguiendo las guías WCAG (Web Content Accessibility Guidelines). Incluye Semantic widgets, screen reader support (TalkBack/VoiceOver), focus management, y contrast ratios.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - **Siempre** - La accesibilidad debe ser una prioridad

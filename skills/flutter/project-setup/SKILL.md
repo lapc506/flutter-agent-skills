@@ -16,7 +16,7 @@
 - `scaffold`
 - `config`
 - `initialization`
-- `@skill:project-setup`
+- `@skill:flutter-project-setup`
 
 ### Ejemplos de Prompts
 
@@ -35,6 +35,63 @@ Necesito scaffold básico con configuración estándar
 ## 📖 Descripción
 
 Configuración estándar para cualquier proyecto Flutter con mejores prácticas, incluyendo análisis estático, flavors, temas, y estructura básica.
+
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
+## 🚀 Scripts de Inicialización Automática
+
+Este skill incluye scripts automatizados para inicializar un proyecto Flutter en una estructura de monorepo:
+
+### 1. Setup del Proyecto
+
+#### Windows (PowerShell)
+
+```powershell
+.\skills\flutter\project-setup\scripts\setup.ps1
+```
+
+#### Linux/macOS (Bash)
+
+```bash
+chmod +x skills/flutter/project-setup/scripts/setup.sh
+./skills/flutter/project-setup/scripts/setup.sh
+```
+
+Los scripts de setup realizan automáticamente:
+1. ✅ Verificación de instalación de Flutter
+2. ✅ Creación de estructura de monorepo (`backend/` y `mobile/`)
+3. ✅ Inicialización del proyecto Flutter en `mobile/`
+4. ✅ Instalación de dependencias
+5. ✅ Creación de archivos de configuración básicos (`.env-sample`, `.gitignore`)
+6. ✅ Generación de README para el proyecto mobile
+
+**Nota:** Los scripts están diseñados para ejecutarse desde la raíz del proyecto monorepo.
+
+### 2. Creación de Symlinks para Herramientas de IA
+
+Para que los skills agénticos estén disponibles en diferentes herramientas de IA (Cursor, Kiro, Claude, Gemini, OpenAI Codex), puedes crear symlinks automáticamente:
+
+#### Windows (PowerShell - Requiere permisos de administrador)
+
+```powershell
+.\skills\flutter\project-setup\scripts\create-symlinks.ps1
+```
+
+#### Linux/macOS (Bash)
+
+```bash
+chmod +x skills/flutter/project-setup/scripts/create-symlinks.sh
+./skills/flutter/project-setup/scripts/create-symlinks.sh
+```
+
+Los scripts de symlinks crean enlaces simbólicos desde `skills/` hacia:
+- **Cursor Rules:** `.cursor/rules/skills`
+- **Kiro Steering:** `.kilocode/rules/skills`
+- **Claude Skills:** `.claude/skills/*` (un symlink por skill)
+- **Gemini Extensions:** `~/.gemini/extensions/flutter-agent-skills`
+- **OpenAI Codex:** `codex/skills/*` (un symlink por skill)
+
+**Nota:** En Windows, este script requiere ejecutarse como administrador debido a las restricciones de creación de symlinks.
 
 ### ✅ Cuándo Usar Este Skill
 
@@ -282,6 +339,7 @@ dev_dependencies:
 
 ## ✅ Checklist de Configuración
 
+- [ ] Ejecutar script de inicialización (`setup.ps1` o `setup.sh`)
 - [ ] Configurar `analysis_options.yaml`
 - [ ] Configurar flavors (dev, staging, production)
 - [ ] Configurar internacionalización (i18n)
@@ -290,6 +348,16 @@ dev_dependencies:
 - [ ] Configurar constantes
 - [ ] Configurar estructura de carpetas
 - [ ] Agregar dependencias básicas
+
+## 📁 Archivos del Skill
+
+Este skill incluye los siguientes archivos:
+
+- `SKILL.md` - Documentación completa del skill
+- `scripts/setup.ps1` - Script de inicialización para Windows (PowerShell)
+- `scripts/setup.sh` - Script de inicialización para Linux/macOS (Bash)
+- `scripts/create-symlinks.ps1` - Script para crear symlinks en Windows (PowerShell, requiere admin)
+- `scripts/create-symlinks.sh` - Script para crear symlinks en Linux/macOS (Bash)
 
 ---
 

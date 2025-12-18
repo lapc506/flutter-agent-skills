@@ -43,6 +43,10 @@ Setup firebase-distribution para beta testing
 
 Este skill cubre la distribución de aplicaciones Flutter en múltiples canales: TestFlight (iOS), Google Play Internal Testing, Firebase App Distribution, y automatización con Fastlane. Incluye configuración de flavors, signing, y CI/CD integration.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - Distribución a beta testers
@@ -537,9 +541,17 @@ firebase init
 # scripts/distribute_firebase.sh
 #!/bin/bash
 
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Build Flutter app
+cd mobile
 flutter build apk --flavor staging --release
 flutter build ios --flavor staging --release --no-codesign
+cd ..
 
 # Distribute Android
 firebase appdistribution:distribute \
@@ -664,6 +676,7 @@ jobs:
           echo "$KEY_PROPERTIES" > android/key.properties
 
       - name: Build AAB
+        working-directory: mobile
         run: flutter build appbundle --flavor production --release
 
       - name: Setup Ruby
@@ -719,13 +732,19 @@ if [ -z "$VERSION" ] || [ -z "$BUILD_NUMBER" ]; then
     exit 1
 fi
 
-# Update pubspec.yaml
-sed -i "" "s/^version: .*/version: $VERSION+$BUILD_NUMBER/" pubspec.yaml
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
+# Update mobile/pubspec.yaml
+sed -i "" "s/^version: .*/version: $VERSION+$BUILD_NUMBER/" mobile/pubspec.yaml
 
 echo "✅ Version updated to $VERSION+$BUILD_NUMBER"
 
 # Commit changes
-git add pubspec.yaml
+git add mobile/pubspec.yaml
 git commit -m "chore: bump version to $VERSION+$BUILD_NUMBER"
 git tag "v$VERSION"
 

@@ -38,6 +38,8 @@ Crea un sistema de diseño con temas personalizados
 
 Theming Avanzado permite crear un sistema de diseño consistente con soporte para múltiples temas (light/dark/custom), Material 3, tipografía personalizada, y cambio dinámico de temas. Incluye tokens de diseño, componentes reutilizables y adaptación automática al sistema.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - Necesitas dark mode + light mode

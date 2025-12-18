@@ -1,4 +1,4 @@
-# flutter_agentic_boilerplate
+# flutter_app
 
 A new Flutter project.
 

@@ -41,6 +41,8 @@ Configura animationcontroller con custom tweens
 
 ## 📖 Descripción
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 Este skill cubre animaciones y motion design en Flutter desde lo básico (AnimationController, Tween) hasta soluciones avanzadas (Rive, Lottie). Incluye implicit animations, explicit animations, Hero animations, page transitions, y animated builders.
 
 ### ✅ Cuándo Usar Este Skill
@@ -733,7 +735,7 @@ final riveFile = await File.asset(
 **Note on Impeller Renderer:**
 Starting in Flutter v3.10, Impeller is the default renderer on iOS. If you encounter visual discrepancies:
 
-1. Test with Skia: `flutter run --no-enable-impeller`
+1. Test with Skia: `cd mobile && flutter run --no-enable-impeller && cd ..`
 2. Test on latest master channel
 3. Report issues to Flutter team if problems persist
 
@@ -1048,8 +1050,16 @@ final stateMachine = artboard.stateMachineByName('State Machine 1');
 #### Renderer Issues with Impeller
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # If visual discrepancies on iOS, test with Skia:
+cd mobile
 flutter run --no-enable-impeller
+cd ..
 
 # Or try Flutter renderer instead:
 final file = await File.asset(
@@ -1063,8 +1073,16 @@ final file = await File.asset(
 ```bash
 # Clean and rebuild
 flutter clean
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
+cd mobile
 flutter pub get
 flutter run
+cd ..
 
 # Or manually setup native libraries
 dart run rive_native:setup --verbose --clean --platform ios

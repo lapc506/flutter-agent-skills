@@ -49,6 +49,10 @@ Configura auto_route para navigation con code generation
 
 Code Generation en Flutter automatiza la creación de código boilerplate, reduciendo errores, mejorando type safety y aumentando dramáticamente la productividad del desarrollador. Este skill cubre las herramientas principales del ecosistema Flutter para generación de código.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - Proyectos con muchos modelos de datos (DTOs, entities)
@@ -160,17 +164,31 @@ dev_dependencies:
 flutter pub add freezed_annotation json_annotation injectable get_it auto_route
 flutter pub add dev:build_runner dev:freezed dev:json_serializable dev:injectable_generator dev:auto_route_generator
 
+# ⚠️ IMPORTANTE: Ejecutar desde la raíz del proyecto (donde está mobile/)
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Generar código (one-time)
+cd mobile
 flutter pub run build_runner build
+cd ..
 
 # Generar con limpieza de conflictos
+cd mobile
 flutter pub run build_runner build --delete-conflicting-outputs
+cd ..
 
 # Watch mode (regenera automáticamente)
+cd mobile
 flutter pub run build_runner watch --delete-conflicting-outputs
+cd ..
 
 # Limpiar archivos generados
+cd mobile
 flutter pub run build_runner clean
+cd ..
 ```
 
 #### 1.2 Configuración build.yaml
@@ -1093,11 +1111,21 @@ mkdir -p lib/{models,services,routes,di,screens}
 # - lib/routes/app_router.dart
 # - lib/models/user.dart
 
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # 5. Generar código
+cd mobile
 flutter pub run build_runner build --delete-conflicting-outputs
+cd ..
 
 # 6. Ejecutar en watch mode durante desarrollo
+cd mobile
 flutter pub run build_runner watch --delete-conflicting-outputs
+cd ..
 ```
 
 ## 🎯 Mejores Prácticas
@@ -1152,11 +1180,21 @@ lib/
 ### 3. Watch Mode Durante Desarrollo
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Terminal 1: Watch mode
+cd mobile
 flutter pub run build_runner watch --delete-conflicting-outputs
+cd ..
 
 # Terminal 2: Hot reload app
+cd mobile
 flutter run
+cd ..
 ```
 
 ### 4. CI/CD Integration
@@ -1179,12 +1217,15 @@ jobs:
           cache: true
       
       - name: Get dependencies
+        working-directory: mobile
         run: flutter pub get
       
       - name: Generate code
+        working-directory: mobile
         run: flutter pub run build_runner build --delete-conflicting-outputs
       
       - name: Analyze
+        working-directory: mobile
         run: flutter analyze
       
       - name: Test
@@ -1194,17 +1235,29 @@ jobs:
 ### 5. Performance Optimization
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Use cache entre builds
+cd mobile
 flutter pub run build_runner build --delete-conflicting-outputs
+cd ..
 
 # Para builds muy lentos, usa:
+cd mobile
 flutter pub run build_runner build --delete-conflicting-outputs --low-resources-mode
+cd ..
 
 # Limpia cache si hay problemas
+cd mobile
 flutter clean
 flutter pub get
 flutter pub run build_runner clean
 flutter pub run build_runner build --delete-conflicting-outputs
+cd ..
 ```
 
 ### 6. Freezed vs Manual Implementation
@@ -1226,8 +1279,16 @@ flutter pub run build_runner build --delete-conflicting-outputs
 ### Error: "Conflicting outputs"
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Solución: Usar --delete-conflicting-outputs
+cd mobile
 flutter pub run build_runner build --delete-conflicting-outputs
+cd ..
 ```
 
 ### Error: "Part file doesn't exist"
@@ -1241,12 +1302,22 @@ part 'user_freezed.dart';  // ❌ Incorrecto (sin punto)
 ### Error: Build muy lento
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # 1. Limpiar cache
+cd mobile
 flutter clean
 flutter pub get
+cd ..
 
 # 2. Usar low-resources-mode
+cd mobile
 flutter pub run build_runner build --low-resources-mode
+cd ..
 
 # 3. Reducir builders activos en build.yaml
 ```
@@ -1266,9 +1337,17 @@ class User with _$User {
 ### Error: Generated file no actualiza
 
 ```bash
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Forzar regeneración
+cd mobile
 flutter pub run build_runner clean
 flutter pub run build_runner build --delete-conflicting-outputs
+cd ..
 ```
 
 ### Error: JSON serialization falla
@@ -1298,18 +1377,18 @@ help:
 	@echo "  make get      - Obtener dependencias"
 
 get:
-	flutter pub get
+	cd mobile && flutter pub get
 
 generate: get
-	flutter pub run build_runner build --delete-conflicting-outputs
+	cd mobile && flutter pub run build_runner build --delete-conflicting-outputs
 
 watch: get
-	flutter pub run build_runner watch --delete-conflicting-outputs
+	cd mobile && flutter pub run build_runner watch --delete-conflicting-outputs
 
 clean:
-	flutter clean
-	flutter pub get
-	flutter pub run build_runner clean
+	cd mobile && flutter clean
+	cd mobile && flutter pub get
+	cd mobile && flutter pub run build_runner clean
 
 rebuild: clean generate
 

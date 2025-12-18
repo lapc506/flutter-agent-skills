@@ -1,0 +1,16 @@
+{
+  "@@locale": "en",
+  "appTitle": "Flutter App",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "Welcome",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading indicator text"
+  }
+}
+

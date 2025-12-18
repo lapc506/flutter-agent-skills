@@ -39,6 +39,8 @@ Configura app-links y universal-links
 
 ## 📖 Descripción
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 Este skill cubre la implementación de deep linking, universal links (iOS) y app links (Android) usando go_router. Incluye configuración de dominios, asociación de archivos, y routing dinámico basado en URLs.
 
 ### ✅ Cuándo Usar Este Skill

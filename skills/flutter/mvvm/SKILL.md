@@ -37,6 +37,8 @@ Implementa model-view-viewmodel para un módulo de productos
 
 El patrón MVVM (Model-View-ViewModel) proporciona una separación clara entre la lógica de negocio y la interfaz de usuario, facilitando el testing, mantenimiento y escalabilidad del código.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - Proyectos medianos con lógica de negocio moderada

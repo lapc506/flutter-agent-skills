@@ -9,8 +9,10 @@ param(
 $ErrorActionPreference = "Stop"
 
 # Cambiar al directorio raíz del proyecto (donde está este script)
+# El script está en: skills/flutter/project-setup/scripts/
+# Necesitamos subir 3 niveles para llegar a la raíz del proyecto
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
-$projectRoot = Split-Path -Parent $scriptPath
+$projectRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $scriptPath))
 Set-Location $projectRoot
 
 # Colores para output (PowerShell)
@@ -90,6 +92,25 @@ function Get-ProjectName {
     Write-Info "Nombre del proyecto: $script:ProjectName"
 }
 
+# Obtener el nombre del paquete de la aplicación
+function Get-PackageName {
+    Write-Info "El nombre del paquete identifica tu aplicación de forma única (ej: com.miempresa.miapp)"
+    $input = Read-Host "Ingresa el nombre del paquete (default: com.example.$($script:ProjectName.Replace('_', '').Replace('-', '').ToLower()))"
+    if ([string]::IsNullOrWhiteSpace($input)) {
+        $script:PackageName = "com.example.$($script:ProjectName.Replace('_', '').Replace('-', '').ToLower())"
+    } else {
+        $script:PackageName = $input
+    }
+    
+    # Validar formato básico del nombre del paquete
+    if ($script:PackageName -notmatch '^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$') {
+        Write-Warning "El nombre del paquete debe seguir el formato: com.ejemplo.miapp (solo letras minúsculas, números y puntos)"
+        Write-Info "Usando nombre por defecto: $script:PackageName"
+    }
+    
+    Write-Info "Nombre del paquete: $script:PackageName"
+}
+
 # Crear estructura de directorios
 function New-ProjectStructure {
     Write-Info "Creando estructura de monorepo..."
@@ -159,12 +180,46 @@ function Install-Dependencies {
     Push-Location mobile
     
     try {
+        # Agregar change_app_package_name como dev_dependency
+        Write-Info "Agregando change_app_package_name como dependencia de desarrollo..."
+        flutter pub add -d change_app_package_name
+        
+        if ($LASTEXITCODE -ne 0) {
+            throw "Error al agregar change_app_package_name"
+        }
+        
         flutter pub get
         if ($LASTEXITCODE -eq 0) {
             Write-Success "Dependencias instaladas correctamente"
         } else {
             throw "Error al instalar dependencias"
         }
+    }
+    finally {
+        Pop-Location
+    }
+}
+
+# Cambiar el nombre del paquete usando change_app_package_name
+function Change-PackageName {
+    Write-Info "Cambiando el nombre del paquete a: $script:PackageName..."
+    
+    Push-Location mobile
+    
+    try {
+        # Ejecutar el comando para cambiar el nombre del paquete
+        Write-Info "Ejecutando change_app_package_name..."
+        dart run change_app_package_name:main $script:PackageName
+        
+        if ($LASTEXITCODE -eq 0) {
+            Write-Success "Nombre del paquete cambiado exitosamente a: $script:PackageName"
+        } else {
+            Write-Warning "Hubo un problema al cambiar el nombre del paquete. Verifica manualmente."
+        }
+    }
+    catch {
+        Write-Warning "Error al cambiar el nombre del paquete: $_"
+        Write-Info "Puedes cambiarlo manualmente más tarde usando: dart run change_app_package_name:main $script:PackageName"
     }
     finally {
         Pop-Location
@@ -308,6 +363,10 @@ function Show-Summary {
     Write-Host "  ├── backend/          (directorio para tu backend)"
     Write-Host "  └── mobile/           (proyecto Flutter)"
     Write-Host ""
+    Write-Host "Configuración aplicada:"
+    Write-Host "  • Nombre del proyecto: $script:ProjectName"
+    Write-Host "  • Nombre del paquete: $script:PackageName"
+    Write-Host ""
     Write-Host "Próximos pasos:"
     Write-Host "  1. cd mobile"
     Write-Host "  2. Copia .env-sample a .env y configura tus variables"
@@ -329,9 +388,11 @@ function Main {
     
     Test-Flutter
     Get-ProjectName
+    Get-PackageName
     New-ProjectStructure
     New-FlutterProject
     Install-Dependencies
+    Change-PackageName
     New-ConfigFiles
     New-MobileReadme
     Show-Summary

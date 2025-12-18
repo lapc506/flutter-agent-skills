@@ -41,6 +41,10 @@ Implementa Firebase Authentication y Cloud Messaging
 
 Firebase Integration proporciona servicios backend completos: Authentication (Email/Password y Google Sign-In), Firestore Database, Cloud Storage, Push Notifications (FCM), Analytics (con tracking de screens, eventos personalizados, user ID y propiedades), Crashlytics y Remote Config. Incluye integración con Provider para state management y configuración multiplataforma con mejores prácticas.
 
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
+**⚠️ IMPORTANTE:** Todos los comandos de este skill deben ejecutarse desde la **raíz del proyecto** (donde existe el directorio `mobile/`). El skill incluye verificaciones para asegurar que se está en el directorio correcto antes de ejecutar cualquier comando.
+
 ### ✅ Cuándo Usar Este Skill
 
 - Backend as a Service rápido
@@ -174,10 +178,19 @@ npm install -g firebase-tools
 # Login a Firebase
 firebase login
 
+# Verificar que estamos en la raíz del proyecto
+if [ ! -d "mobile" ]; then
+    echo "Error: Ejecuta este comando desde la raíz del proyecto"
+    exit 1
+fi
+
 # Instalar FlutterFire CLI
 dart pub global activate flutterfire_cli
 
 # Configurar Firebase para el proyecto
+cd mobile
+flutterfire configure
+cd ..
 flutterfire configure
 ```
 
