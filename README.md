@@ -22,6 +22,131 @@ O haz fork del repo, personaliza la plantilla a tu gusto y hazla tuya.
 
 Dicho esto, los skills agénticos están diseñados para evolucionar y pueden combinarse según tus necesidades específicas.
 
+## Comenzando
+
+### Prerrequisitos
+
+- Flutter SDK instalado (versión estable recomendada)
+- Dart SDK (incluido con Flutter)
+- Android Studio / Xcode para desarrollo móvil
+- Git
+
+### Inicialización Rápida
+
+Puedes inicializar el proyecto de dos formas:
+
+#### Opción 1: Usando el Skill Agéntico (Recomendado)
+
+Invoca el skill `@skill:flutter-project-setup` con tu asistente de IA para obtener una configuración guiada y personalizada del proyecto.
+
+**Ejemplo:** *Levanta un proyecto Flutter usando @skill:flutter-project-setup y con @skill:riverpod y con @skill:clean-architecture.*
+
+#### Opción 2: Usando Scripts Automatizados
+
+Este proyecto incluye scripts automatizados que forman parte del skill `project-setup`:
+
+**Windows (PowerShell):**
+
+```powershell
+.\skills\flutter\project-setup\scripts\setup.ps1
+```
+
+**Linux/macOS (Bash):**
+
+```bash
+chmod +x skills/flutter/project-setup/scripts/setup.sh
+./skills/flutter/project-setup/scripts/setup.sh
+```
+
+Los scripts de setup realizarán automáticamente:
+1. Verificación de instalación de Flutter
+2. Creación de la estructura del monorepo (`backend/` y `mobile/`)
+3. Inicialización del proyecto Flutter en `mobile/`
+4. Instalación de dependencias
+5. Configuración básica del proyecto (`.env-sample`, `.gitignore`, README)
+
+## Despliegue
+
+Antes de lanzar tu app de Android, asegúrate de firmarla:
+
+1. Genera un archivo Keystore si aún no tienes uno. Si tienes uno, ignora este paso y ve al siguiente.
+2. Ve a `mobile/android/key.properties` e incluye la ruta de tu Keystore, alias y contraseña.
+
+## Skills Agénticos Disponibles
+
+Este proyecto incluye un sistema de **Agent Skills** que proporciona conocimiento contextual y capacidades especializadas a los asistentes de IA. Los skills se invocan automáticamente basándose en keywords en tus prompts o explícitamente usando la sintaxis `@skill:`.
+
+Para más detalles sobre cada skill, consulta [AGENTS.md](AGENTS.md).
+
+### 🎨 Flutter Skills (28)
+
+- `@skill:flutter/mvvm` - Patrón MVVM con separación clara entre UI y lógica de negocio
+- `@skill:flutter/clean-architecture` - Arquitectura en capas (Domain/Data/Presentation) con máxima testabilidad
+- `@skill:flutter/project-setup` - Configuración inicial estándar con análisis estático, flavors, temas y i18n
+- `@skill:flutter/testing` - Estrategia completa de testing: unit, widget e integration tests
+- `@skill:flutter/bloc-advanced` - State management con BLoC avanzado: Hydrated BLoC, Replay BLoC, transformers
+- `@skill:flutter/riverpod` - State management con Riverpod: providers, hooks, y gestión de estado reactiva
+- `@skill:flutter/feature-first` - Organización del código por features en lugar de capas técnicas
+- `@skill:flutter/modular-architecture` - Arquitectura modular con módulos independientes y reutilizables
+- `@skill:flutter/code-generation` - Automatización de código boilerplate con build_runner, freezed, json_serializable
+- `@skill:flutter/performance` - Optimización de rendimiento: profiling, memory leaks, rendering optimization
+- `@skill:flutter/accessibility` - Implementación de accesibilidad con semantic widgets y screen reader support
+- `@skill:flutter/animation-motion` - Animaciones avanzadas con Rive, Lottie, Hero animations y AnimationController
+- `@skill:flutter/theming` - Sistema de diseño con múltiples temas, Material 3, dark mode y cambio dinámico
+- `@skill:flutter/i18n` - Soporte para múltiples idiomas con flutter_localizations, ARB files y formateo regional
+- `@skill:flutter/firebase` - Integración completa con Firebase: Auth, Firestore, Cloud Messaging y Analytics
+- `@skill:flutter/graphql` - Integración con GraphQL: queries, mutations, subscriptions en tiempo real
+- `@skill:flutter/offline-first` - Arquitectura offline-first con cache inteligente y sincronización bidireccional
+- `@skill:flutter/deep-linking` - Deep linking con universal links (iOS) y app links (Android) usando go_router
+- `@skill:flutter/push-notifications` - Push notifications con Firebase Cloud Messaging y local notifications
+- `@skill:flutter/analytics-tracking` - Analytics y tracking de eventos con Firebase Analytics, Mixpanel y Amplitude
+- `@skill:flutter/error-tracking` - Monitoreo de errores con Sentry y Firebase Crashlytics
+- `@skill:flutter/feature-flags` - Feature flags y remote configuration con Firebase Remote Config y LaunchDarkly
+- `@skill:flutter/in-app-purchases` - In-App Purchases y subscriptions con RevenueCat
+- `@skill:flutter/app-distribution` - Distribución de apps: TestFlight, Google Play Internal Testing, Firebase App Distribution
+- `@skill:flutter/platform-channels` - Comunicación bidireccional con código nativo: MethodChannel, EventChannel y FFI
+- `@skill:flutter/native-integration` - Integración profunda con APIs nativas de iOS (Swift/UIKit) y Android (Kotlin)
+- `@skill:flutter/webview-integration` - Integración de WebViews con flutter_inappwebview y JavaScript channels
+- `@skill:flutter/security` - Mejores prácticas de seguridad: obfuscation, certificate pinning, secure storage
+
+### 🚀 CI/CD Skills (9)
+
+- `@skill:cicd/github-actions` - CI/CD nativo de GitHub para automatizar testing, building y deployment
+- `@skill:cicd/argocd` - GitOps deployment para Kubernetes, sincronizando automáticamente el estado del cluster
+- `@skill:cicd/terraform` - Infrastructure as Code multi-cloud para definir y provision infraestructura
+- `@skill:cicd/aws` - Amazon Web Services deployment: EKS, RDS, S3, Lambda
+- `@skill:cicd/gcp` - Google Cloud Platform deployment: GKE, Cloud Run, Cloud SQL, Firebase
+- `@skill:cicd/azure` - Microsoft Azure deployment: AKS, Azure Functions, Azure SQL, Cosmos DB
+- `@skill:cicd/ovhcloud` - OVHCloud deployment (EU-based): Managed Kubernetes, Object Storage, Databases
+- `@skill:cicd/ansible-awx` - Configuration management y automation con Ansible AWX
+- `@skill:cicd/crossplane` - Kubernetes-native infrastructure management multi-cloud
+
+### 🎨 Design Integration Skills (1)
+
+- `@skill:figma` - Integración con Figma Dev Mode vía MCP para extraer assets y componentes
+
+### 🔍 Static Analysis Skills (1)
+
+- `@skill:static-analysis` - Herramientas de análisis estático: Dart Analyzer, Datadog SAST y CodeRabbit CLI
+
+### 🛡️ System Reliability Engineering Skills (14)
+
+- `@skill:sre/alerting-incident-management` - Gestión de alertas e incidentes
+- `@skill:sre/api-gateway-rate-limiting` - Rate limiting en API Gateway
+- `@skill:sre/chaos-engineering` - Ingeniería del caos para testing de resiliencia
+- `@skill:sre/container-security` - Seguridad de contenedores
+- `@skill:sre/cost-optimization-finops` - Optimización de costos y FinOps
+- `@skill:sre/database-reliability` - Confiabilidad de bases de datos
+- `@skill:sre/disaster-recovery-business-continuity` - Recuperación ante desastres y continuidad de negocio
+- `@skill:sre/load-testing-performance` - Testing de carga y rendimiento
+- `@skill:sre/logging-log-aggregation` - Logging y agregación de logs
+- `@skill:sre/network-policies-security` - Políticas de red y seguridad
+- `@skill:sre/observability-stack` - Stack de observabilidad completo
+- `@skill:sre/post-mortem` - Procesos de post-mortem
+- `@skill:sre/security-compliance-automation` - Automatización de seguridad y compliance
+- `@skill:sre/service-mesh` - Service mesh para microservicios
+- `@skill:sre/slo-sli-sla` - Service Level Objectives, Indicators y Agreements
+
 ## Ejemplo de Estructura del Monorepo
 
 ```
@@ -134,111 +259,6 @@ proyecto/
 │   └── gemini-extension.json
 └── README.md
 ```
-
-## Comenzando
-
-### Prerrequisitos
-
-- Flutter SDK instalado (versión estable recomendada)
-- Dart SDK (incluido con Flutter)
-- Android Studio / Xcode para desarrollo móvil
-- Git
-
-### Inicialización Rápida
-
-Puedes inicializar el proyecto de dos formas:
-
-#### Opción 1: Usando el Skill Agéntico (Recomendado)
-
-Invoca el skill `@skill:flutter-project-setup` con tu asistente de IA para obtener una configuración guiada y personalizada del proyecto.
-
-#### Opción 2: Usando Scripts Automatizados
-
-Este proyecto incluye scripts automatizados que forman parte del skill `project-setup`:
-
-**Windows (PowerShell):**
-
-```powershell
-.\skills\flutter\project-setup\scripts\setup.ps1
-```
-
-**Linux/macOS (Bash):**
-
-```bash
-chmod +x skills/flutter/project-setup/scripts/setup.sh
-./skills/flutter/project-setup/scripts/setup.sh
-```
-
-Los scripts de setup realizarán automáticamente:
-1. Verificación de instalación de Flutter
-2. Creación de la estructura del monorepo (`backend/` y `mobile/`)
-3. Inicialización del proyecto Flutter en `mobile/`
-4. Instalación de dependencias
-5. Configuración básica del proyecto (`.env-sample`, `.gitignore`, README)
-
-## Despliegue
-
-Antes de lanzar tu app de Android, asegúrate de firmarla:
-
-1. Genera un archivo Keystore si aún no tienes uno. Si tienes uno, ignora este paso y ve al siguiente.
-2. Ve a `mobile/android/key.properties` e incluye la ruta de tu Keystore, alias y contraseña.
-
-## Skills Agénticos Disponibles
-
-Este proyecto incluye un sistema de **Agent Skills** que proporciona conocimiento contextual y capacidades especializadas a los asistentes de IA. Los skills se invocan automáticamente basándose en keywords en tus prompts o explícitamente usando la sintaxis `@skill:`.
-
-Para más detalles sobre cada skill, consulta [AGENTS.md](AGENTS.md).
-
-### 🎨 Flutter Skills (28)
-
-1. MVVM
-2. Clean Architecture
-3. Project Setup
-4. Testing Strategy
-5. BLoC Avanzado
-6. Riverpod
-7. Feature-First Architecture
-8. Arquitectura Modular
-9. Code Generation
-10. Performance Optimization
-11. Accessibility (a11y)
-12. Animation & Motion Design
-13. Theming Avanzado
-14. Internacionalización (i18n)
-15. Firebase Integration
-16. GraphQL Integration
-17. Offline-First Architecture
-18. Deep Linking & Universal Links
-19. Push Notifications
-20. Analytics & Tracking
-21. Error Tracking & Crash Reporting
-22. Feature Flags & Remote Config
-23. In-App Purchases (IAP)
-24. App Distribution & Deployment
-25. Platform Channels & Native Integration
-26. Native Integration (Swift/Kotlin)
-27. WebView Integration
-28. Security Best Practices
-
-### 🚀 CI/CD Skills (9)
-
-1. GitHub Actions
-2. ArgoCD
-3. Terraform
-4. AWS
-5. Google Cloud Platform (GCP)
-6. Microsoft Azure
-7. OVHCloud
-8. Ansible AWX
-9. Crossplane
-
-### 🎨 Design Integration Skills (1)
-
-1. Figma Dev Mode
-
-### 🔍 Static Analysis Skills (1)
-
-1. Static Analysis
 
 ## Desarrollo
 
