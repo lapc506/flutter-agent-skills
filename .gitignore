@@ -60,3 +60,9 @@ examples/**/.packages
 .cursor/rules/byterover-rules.mdc
 .kilocode/rules/byterover-rules.md
 .cursor/mcp.json
+.clinerules/byterover-rules.md
+.roo/rules/byterover-rules.md
+.windsurf/rules/byterover-rules.md
+.kiro/steering/byterover-rules.md
+.qoder/rules/byterover-rules.md
+.augment/rules/byterover-rules.md

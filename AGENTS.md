@@ -613,7 +613,7 @@ Herramientas de análisis estático de código: Dart Analyzer, Datadog SAST y Co
 
 ### Plantilla IEEE 830 para ERS
 
-# Regla de Cursor: Generar ERS según IEEE 830
+# Regla del Agente: Generar ERS según IEEE 830
 
 Sigue esta plantilla para generar un documento de Especificación de Requisitos Software (ERS) completo, basado en la estructura del estándar IEEE 830.
 
@@ -756,6 +756,377 @@ CUANDO un usuario se autentique ENTONCES el sistema DEBERÁ emitir un JWT con ex
 ---
 
 ### Especificación de Requisitos Software: Patrones de Diseño de Agentes de IA
+
+## 📋 Mapeo de Skills de Flutter por Patrón Agéntico
+
+Este documento mapea los **skills de Flutter** que deberían invocarse al implementar cada patrón de diseño de agentes de IA. Este mapeo ayuda a los agentes a identificar qué capacidades de Flutter son relevantes para cada patrón específico.
+
+### 🎯 Resumen Ejecutivo
+
+Los skills se organizan en dos categorías por patrón:
+- **Skills Altamente Relevantes:** Skills que son esenciales o críticos para la implementación del patrón
+- **Skills Complementarios:** Skills que mejoran o optimizan la implementación del patrón
+
+---
+
+### 🗺️ Mapeo por Patrón
+
+#### 1. **Encadenamiento de Prompts (Prompt Chaining)**
+
+**Skills Altamente Relevantes:**
+- `clean-architecture`: Separación de responsabilidades para cada paso de la cadena
+- `testing`: Validación de salida entre pasos y tests de integración
+- `error-tracking`: Manejo robusto de errores en cada etapa
+- `modular-architecture`: Modularidad para intercambiar partes de la cadena
+
+**Skills Complementarios:**
+- `performance`: Optimización de latencia en cadenas largas
+- `code-generation`: Generación automática de validadores entre pasos
+- `analytics-tracking`: Monitoreo de rendimiento de cada paso
+
+---
+
+#### 2. **Paralelización (Parallelization)**
+
+**Skills Altamente Relevantes:**
+- `performance`: Optimización de procesamiento paralelo y gestión de recursos
+- `testing`: Tests de concurrencia y sincronización
+- `error-tracking`: Manejo de fallos en trabajadores individuales
+- `modular-architecture`: Arquitectura modular para trabajadores especializados
+
+**Skills Complementarios:**
+- `clean-architecture`: Separación de responsabilidades por trabajador
+- `analytics-tracking`: Métricas de rendimiento por trabajador
+- `offline-first`: Procesamiento offline de subtareas
+
+---
+
+#### 3. **Reflexión (Reflection)**
+
+**Skills Altamente Relevantes:**
+- `testing`: Rúbricas de calidad y pruebas unitarias para validación
+- `error-tracking`: Seguimiento de iteraciones y mejoras
+- `analytics-tracking`: Monitoreo de calidad y convergencia
+- `code-generation`: Generación automática de rúbricas y validadores
+
+**Skills Complementarios:**
+- `performance`: Optimización de iteraciones costosas
+- `clean-architecture`: Separación entre generador y crítico
+
+---
+
+#### 4. **Enrutamiento (Routing)**
+
+**Skills Altamente Relevantes:**
+- `deep-linking`: Enrutamiento declarativo y navegación estructurada
+- `clean-architecture`: Separación de lógica de enrutamiento
+- `testing`: Tests de clasificación y enrutamiento correcto
+- `analytics-tracking`: Métricas de decisiones de enrutamiento
+
+**Skills Complementarios:**
+- `feature-flags`: Feature flags para habilitar/deshabilitar rutas
+- `error-tracking`: Manejo de enrutamiento incorrecto
+
+---
+
+#### 5. **Colaboración Multiagente (Multi-Agent Collaboration)**
+
+**Skills Altamente Relevantes:**
+- `modular-architecture`: Módulos independientes por agente especializado
+- `clean-architecture`: Arquitectura en capas para orquestación
+- `testing`: Tests de integración multiagente
+- `error-tracking`: Manejo de fallos en cadena de agentes
+- `offline-first`: Memoria compartida y sincronización
+
+**Skills Complementarios:**
+- `performance`: Optimización de comunicación entre agentes
+- `analytics-tracking`: Métricas de colaboración y coordinación
+- `platform-channels`: Comunicación entre agentes nativos
+
+---
+
+#### 6. **Comunicación Interagente (Inter-Agent Communication)**
+
+**Skills Altamente Relevantes:**
+- `platform-channels`: Comunicación bidireccional con código nativo
+- `native-integration`: Integración profunda con APIs nativas
+- `security`: Autenticación mutua y comunicación segura
+- `testing`: Tests de protocolo A2A y comunicación multi-modal
+- `deep-linking`: Enrutamiento y descubrimiento de agentes
+
+**Skills Complementarios:**
+- `error-tracking`: Manejo de fallos en comunicación
+- `analytics-tracking`: Métricas de comunicación y latencia
+- `offline-first`: Gestión de estado distribuido
+
+---
+
+#### 7. **Uso de Herramientas (Tool Use)**
+
+**Skills Altamente Relevantes:**
+- `platform-channels`: Integración con herramientas nativas
+- `native-integration`: Acceso a APIs nativas de iOS/Android
+- `security`: Verificación de permisos y validación de seguridad
+- `error-tracking`: Manejo de fallos en herramientas
+- `webview-integration`: Integración con herramientas web
+
+**Skills Complementarios:**
+- `testing`: Tests de integración con herramientas
+- `analytics-tracking`: Métricas de uso de herramientas
+- `offline-first`: Fallback cuando herramientas no están disponibles
+
+---
+
+#### 8. **Gestión de Memoria (Memory Management)**
+
+**Skills Altamente Relevantes:**
+- `offline-first`: Almacenamiento persistente y sincronización
+- `performance`: Optimización de recuperación y almacenamiento
+- `testing`: Tests de persistencia y recuperación de memoria
+- `firebase`: Bases de datos vectoriales y almacenamiento cloud
+
+**Skills Complementarios:**
+- `security`: Protección de datos sensibles en memoria
+- `analytics-tracking`: Métricas de uso de memoria
+- `code-generation`: Generación de modelos de datos
+
+---
+
+#### 9. **Optimización Consciente de Recursos (Resource-Aware Optimization)**
+
+**Skills Altamente Relevantes:**
+- `performance`: Optimización de recursos y clasificación de complejidad
+- `analytics-tracking`: Métricas de costos y uso de recursos
+- `testing`: Tests de asignación de recursos
+- `feature-flags`: Control de recursos por feature flags
+
+**Skills Complementarios:**
+- `clean-architecture`: Separación de lógica de optimización
+- `error-tracking`: Manejo de subestimación de recursos
+
+---
+
+#### 10. **Planificación (Planning)**
+
+**Skills Altamente Relevantes:**
+- `clean-architecture`: Estructura para planes y dependencias
+- `testing`: Tests de planes y validación de restricciones
+- `analytics-tracking`: Métricas de ejecución de planes
+- `modular-architecture`: Módulos por objetivo o hito
+
+**Skills Complementarios:**
+- `error-tracking`: Manejo de desviaciones del plan
+- `performance`: Optimización de tiempo de planificación
+
+---
+
+#### 11. **Establecimiento y Monitoreo de Metas (Goal Setting and Monitoring)**
+
+**Skills Altamente Relevantes:**
+- `analytics-tracking`: KPIs y monitoreo continuo de progreso
+- `testing`: Tests de objetivos SMART y validación de métricas
+- `feature-flags`: Control de objetivos por feature flags
+- `error-tracking`: Detección de desviaciones y alertas
+
+**Skills Complementarios:**
+- `clean-architecture`: Separación de lógica de monitoreo
+- `performance`: Optimización de cálculo de métricas
+
+---
+
+#### 12. **Priorización (Prioritization)**
+
+**Skills Altamente Relevantes:**
+- `performance`: Optimización de algoritmos de priorización
+- `testing`: Tests de criterios de priorización
+- `analytics-tracking`: Métricas de decisiones de priorización
+- `clean-architecture`: Separación de lógica de priorización
+
+**Skills Complementarios:**
+- `error-tracking`: Manejo de starvation y conflictos
+- `feature-flags`: Control de criterios de priorización
+
+---
+
+#### 13. **Aprendizaje y Adaptación (Learning and Adaptation)**
+
+**Skills Altamente Relevantes:**
+- `analytics-tracking`: Recopilación de feedback y señales de calidad
+- `testing`: Validación de datos de feedback y tests de adaptación
+- `offline-first`: Almacenamiento de datos de aprendizaje
+- `error-tracking`: Detección de aprendizaje incorrecto
+
+**Skills Complementarios:**
+- `security`: Protección de datos de feedback sensibles
+- `code-generation`: Generación automática de prompts actualizados
+- `performance`: Optimización de procesamiento de feedback
+
+---
+
+#### 14. **Recuperación de Conocimiento (Knowledge Retrieval/RAG)**
+
+**Skills Altamente Relevantes:**
+- `offline-first`: Indexación y almacenamiento de embeddings
+- `firebase`: Bases de datos vectoriales y almacenamiento cloud
+- `performance`: Optimización de búsqueda y recuperación
+- `testing`: Tests de indexación y retrieval
+
+**Skills Complementarios:**
+- `graphql`: Integración con APIs de conocimiento
+- `security`: Protección de conocimiento sensible
+- `code-generation`: Generación de modelos de embeddings
+
+---
+
+#### 15. **Exploración y Descubrimiento (Exploration and Discovery)**
+
+**Skills Altamente Relevantes:**
+- `offline-first`: Gestión de estado cíclico y persistencia
+- `graphql`: Búsqueda híbrida con APIs externas
+- `webview-integration`: Web scraping y datos en tiempo real
+- `testing`: Tests de ciclo DECIDE y detección de novedad
+- `analytics-tracking`: Métricas de exploración y descubrimientos
+
+**Skills Complementarios:**
+- `performance`: Optimización de iteraciones de exploración
+- `error-tracking`: Manejo de bucles infinitos y errores
+- `code-generation`: Generación de estructuras de exploración
+
+---
+
+#### 16. **Manejo y Recuperación de Excepciones (Exception Handling and Recovery)**
+
+**Skills Altamente Relevantes:**
+- `error-tracking`: Clasificación de errores y planes de respaldo
+- `testing`: Tests de recuperación y manejo de excepciones
+- `analytics-tracking`: Métricas de errores y recuperación
+- `security`: Protección en fallos de seguridad
+
+**Skills Complementarios:**
+- `performance`: Optimización de circuit breakers
+- `clean-architecture`: Separación de lógica de recuperación
+- `feature-flags`: Control de estrategias de recuperación
+
+---
+
+#### 17. **Intervención Humana (Human in the Loop)**
+
+**Skills Altamente Relevantes:**
+- `push-notifications`: Notificaciones para intervención humana
+- `deep-linking`: Enrutamiento a interfaces de aprobación
+- `testing`: Tests de flujos de intervención humana
+- `analytics-tracking`: Métricas de intervenciones y tiempos
+
+**Skills Complementarios:**
+- `security`: Autenticación y autorización para intervenciones
+- `error-tracking`: Seguimiento de intervenciones requeridas
+- `theming`: UI clara para puntos de decisión humana
+
+---
+
+#### 18. **Patrones de Barreras de Seguridad (Guardrails and Safety Patterns)**
+
+**Skills Altamente Relevantes:**
+- `security`: Verificación de contenido dañino y PII
+- `testing`: Tests de guardrails y validación de seguridad
+- `error-tracking`: Detección y clasificación de amenazas
+- `analytics-tracking`: Métricas de amenazas detectadas
+
+**Skills Complementarios:**
+- `clean-architecture`: Separación de lógica de seguridad
+- `performance`: Optimización de verificación de contenido
+- `code-generation`: Generación de validadores de seguridad
+
+---
+
+#### 19. **Evaluación y Monitoreo (Evaluation and Monitoring)**
+
+**Skills Altamente Relevantes:**
+- `analytics-tracking`: Métricas de precisión, rendimiento y costo
+- `error-tracking`: Detección de regresiones y anomalías
+- `testing`: Golden test sets y quality gates
+- `app-distribution`: Monitoreo en producción
+
+**Skills Complementarios:**
+- `performance`: Optimización de sistema de monitoreo
+- `clean-architecture`: Separación de lógica de evaluación
+- `feature-flags`: Control de quality gates
+
+---
+
+#### 20. **Técnicas de Razonamiento (Reasoning Techniques)**
+
+**Skills Altamente Relevantes:**
+- `performance`: Optimización de técnicas costosas de razonamiento
+- `testing`: Tests de razonamiento y validación de lógica
+- `analytics-tracking`: Métricas de calidad de razonamiento
+- `code-generation`: Generación de estructuras de razonamiento
+
+**Skills Complementarios:**
+- `clean-architecture`: Separación de técnicas de razonamiento
+- `error-tracking`: Manejo de overthinking y errores
+- `offline-first`: Cache de razonamientos previos
+
+---
+
+### 📝 Notas de Implementación
+
+#### Cómo Usar Este Mapeo
+
+**Para Agentes de IA:**
+
+Cuando se implemente un patrón de diseño de agentes de IA, los agentes DEBEN:
+
+1. **Consultar este documento** para identificar skills relevantes del patrón
+2. **Invocar los skills "Altamente Relevantes"** como obligatorios
+3. **Considerar los skills "Complementarios"** según el contexto y necesidades
+4. **Aplicar las mejores prácticas** de cada skill invocado según `BEST_PRACTICES_MAPPING.md`
+5. **Validar que la implementación** cumple con los requisitos del patrón y los skills
+
+**Ejemplo de Uso:**
+
+```
+Usuario: "Implementa el patrón de Encadenamiento de Prompts"
+
+Agente:
+1. Detecta patrón: Encadenamiento de Prompts
+2. Consulta este mapeo → Sección 1 (Encadenamiento de Prompts)
+3. Identifica skills relevantes:
+   - Altamente Relevantes: clean-architecture, testing, error-tracking, modular-architecture
+   - Complementarios: performance, code-generation, analytics-tracking
+4. Invoca cada skill y aplica sus mejores prácticas
+5. Genera código que cumple con el patrón y los skills
+```
+
+#### Integración con BEST_PRACTICES_MAPPING.md
+
+Este mapeo complementa `BEST_PRACTICES_MAPPING.md`:
+- **Este documento** mapea patrones agénticos → skills de Flutter
+- **BEST_PRACTICES_MAPPING.md** mapea skills de Flutter → mejores prácticas (REQ-FLT-XXX)
+
+Los agentes deben usar ambos documentos en conjunto:
+1. Patrón agéntico → Skills relevantes (este documento)
+2. Skills → Mejores prácticas a aplicar (BEST_PRACTICES_MAPPING.md)
+
+#### Referencias Cruzadas
+
+Cada patrón está asociado con requisitos específicos (REQ-AGT-XXX) que se encuentran en la sección 3.2 de esta ERS. Los agentes pueden:
+- Consultar los requisitos completos del patrón
+- Identificar los skills relevantes usando este mapeo
+- Aplicar las mejores prácticas de cada skill
+- Validar el cumplimiento durante la implementación
+
+---
+
+### 🔄 Actualización Continua
+
+Este documento debe actualizarse cuando:
+- Se agreguen nuevos patrones de diseño de agentes de IA
+- Se creen nuevos skills en la carpeta `flutter/`
+- Se identifiquen skills adicionales relevantes para patrones existentes
+- Cambien las relaciones entre patrones y skills
+
+---
 
 ## 1. Introducción
 
